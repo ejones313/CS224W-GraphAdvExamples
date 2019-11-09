@@ -20,7 +20,7 @@ def get_labels(start, word, end, typos_to_label):
         print(char_indices)
         pred = utils.predict(model, word_indices, char_indices)
         print(type(pred))
-        preds.append(pred)
+        preds.append(int(pred))
 
     typo2pred = {}
     for typo, pred in zip(typos_to_label, preds):

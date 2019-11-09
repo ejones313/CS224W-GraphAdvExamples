@@ -2,9 +2,9 @@ import utils
 
 
 def get_labels(start, word, end, typos_to_label):
-    if not start.endswith(' '):
+    if not start.endswith(' ') and len(start) > 0:
         start = start + ' '
-    if not end.startswith(' '):
+    if not end.startswith(' ') and len(end) > 0:
         end = ' ' + end
 
     w2i, c2i = utils.load_w2idx()
@@ -26,9 +26,9 @@ def get_labels(start, word, end, typos_to_label):
     return typo2pred
 
 if __name__ == '__main__':
-    start = 'i '
-    end = ' this movie'
-    typos = ['love', 'hate', 'like', 'really enjoyed', 'did not like']
+    start = 'this movie was '
+    end = ''
+    typos = ['good', 'bad', 'great', 'horrible']
     typo2pred = get_labels(start, 'DEFAULT', end, typos)
     print(typo2pred)
 

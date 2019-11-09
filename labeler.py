@@ -1,4 +1,6 @@
 import utils 
+import random
+from edit_dist_utils import get_all_edit_dist_one
 
 
 def get_labels(start, word, end, typos_to_label):
@@ -25,10 +27,17 @@ def get_labels(start, word, end, typos_to_label):
         typo2pred[typo] = pred
     return typo2pred
 
+def get_random_typos(word, n = 10):
+    all_typos = get_all_edit_dist_one(word)
+    samples = random.sample(all_typos, n)
+    return samples 
+
 if __name__ == '__main__':
     start = 'this movie was '
     end = ''
-    typos = ['good', 'bad', 'great', 'horrible']
+    word = ['horrible']
+
+    typos = get_random_typos('horrible', 100)
     typo2pred = get_labels(start, 'DEFAULT', end, typos)
     print(typo2pred)
 

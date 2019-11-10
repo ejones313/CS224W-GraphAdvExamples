@@ -15,11 +15,8 @@ def get_labels(start, word, end, typos_to_label):
     preds = []
 
     for line in lines:
-        print(line)
         word_indices, char_indices = utils.get_word_and_char_indices(line, w2i, c2i)
-        print(char_indices)
         pred = utils.predict(model, word_indices, char_indices)
-        print(type(pred))
         preds.append(int(pred))
 
     typo2pred = {}

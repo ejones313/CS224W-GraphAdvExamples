@@ -4,6 +4,7 @@ import numpy as np
 class LabelPropagator():
 	def __init__(self, word):
 		nodes, edges = construct_graph.construct_graph(word)
+		print("Number of nodes: {}, number of edges{}/{}".format(len(nodes), len(edges), len(nodes) * (len(nodes) - 1)/2))
 		self.idx2neighbors, self.idx2node, self.node2idx = construct_graph.construct_neighbor_map(nodes, edges)
 		self.nodes = nodes
 		self.edges = edges 
@@ -18,7 +19,6 @@ class LabelPropagator():
 		num_nodes = len(self.nodes)
 		current_labels = np.ones(num_nodes) / 2
 		for idx in self.hard_labels:
-			print("Index: ", idx)
 			current_labels[idx] = self.hard_labels[idx]
 
 		for i in range(num_nodes):
@@ -27,5 +27,9 @@ class LabelPropagator():
 				current_labels[i] = neighbor_mean
 
 		self.labels = current_labels 
-		return current_labels
+		node_dict = {}
+		for i in range(len(self.labels)):
+			node = self.idx2node[i]
+			node_dict[node] = self.labels[i]
+		return node_dict
 

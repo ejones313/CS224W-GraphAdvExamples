@@ -2,8 +2,9 @@ import construct_graph
 import numpy as np 
 
 class LabelPropagator():
-	def __init__(self, word):
-		nodes, edges = construct_graph.construct_graph(word)
+	def __init__(self, word, filetype = 1111):
+		print("Filetype in label propagator: ", filetype)
+		nodes, edges = construct_graph.construct_graph(word, filetype = filetype)
 		print("Number of nodes: {}, number of edges{}/{}".format(len(nodes), len(edges), len(nodes) * (len(nodes) - 1)/2))
 		self.idx2neighbors, self.idx2node, self.node2idx = construct_graph.construct_neighbor_map(nodes, edges)
 		self.nodes = nodes
@@ -23,6 +24,7 @@ class LabelPropagator():
 
 		for i in range(num_nodes):
 			if i not in self.hard_labels:
+				print("Node and neighbors: ", self.idx2node[i], self.idx2neighbors[i])
 				neighbor_mean = current_labels[self.idx2neighbors[i]].mean()
 				current_labels[i] = neighbor_mean
 

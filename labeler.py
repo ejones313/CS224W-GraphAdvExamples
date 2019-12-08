@@ -24,8 +24,8 @@ def get_labels(start, word, end, typos_to_label):
         typo2pred[typo] = pred
     return typo2pred
 
-def get_random_typos(word, n = 10):
-    all_typos = get_all_edit_dist_one(word)
+def get_random_typos(word, n = 10, filetype = 1111):
+    all_typos = get_all_edit_dist_one(word, filetype = filetype)
     samples = random.sample(all_typos, n)
     return samples 
 
